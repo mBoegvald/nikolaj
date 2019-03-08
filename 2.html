@@ -18,12 +18,11 @@
             position: relative;
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-
+            overflow: hidden;
         }
         
         div.container {
             margin: 0;
-            background: black;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -61,22 +60,47 @@
 
         .column {
             grid-column: span 1;
+            border: 2px solid grey;
+            transition: 1s;
+            z-index: 1;
             
         }
 
         .aboutSlide {
-            
-            max-width: 0;
-            background-color: black;
+            transform: translateX(-100%);
+            background-color: white;
         }
 
-        .slide {
-            transition: 2s;
+        .slideLeft {
+            transition: 1s;
             transition-timing-function: ease-out;
-            max-width: 100%;
+            transform: translateX(0);
+            
+        }
+
+        .workSlide {
+            transform: translateY(-100%);
+            background-color: white;
+        }
+
+        .slideTop {
+            
+            transition-timing-function: ease-out;
+            transform: translateY(0);
             z-index: 1;
         }
 
+        .contactSlide {
+            background-color: white;
+            transform: translateX(100%);
+        }
+
+        .slideRight {
+            transition: 1s;
+            transition-timing-function: ease-out;
+            transform: translateX(0);
+            z-index: 1;
+        }
 
     </style>
 </head>
@@ -93,28 +117,71 @@
                 <p class="contact">Contact</p>
         </div>
 
-        <div class="column aboutSlide"></div>
+        <div class="column aboutSlide">
+
+            <button class="close">&times;</button>
+        </div>
 
         <div class="column workSlide">
+            <button class="close">&times;</button>
+        </div>
+        <div class="column contactSlide">
+            <button class="close">&times;</button>
+
+        </div>
 
         </div>
         
-
-        </div>
-        <div class="column contactSlide">
-
-        </div>
         <div class="container">
             <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4"></iframe>
         </div>
     </div>
 
     <script>
-    
+
+        let buttons = document.querySelectorAll(".close");
+        console.log(buttons);
     document.querySelector(".aboutWrapper").addEventListener("click", addSlide);
+    
 
     function addSlide() {
-        document.querySelector(".aboutSlide").classList.add("slide")
+        document.querySelector(".aboutSlide").classList.add("slideLeft")
+    }
+
+    document.querySelector(".workWrapper").addEventListener("click", addSlide2);
+    
+
+    function addSlide2() {
+        document.querySelector(".workSlide").classList.add("slideTop")
+    }
+
+    document.querySelector(".contactWrapper").addEventListener("click", addSlide3);
+    
+
+    function addSlide3() {
+        document.querySelector(".contactSlide").classList.add("slideRight")
+    }
+    
+    for (let i = 0; i < buttons.length; i++) {
+            let self = buttons[i];
+
+            self.addEventListener("click", function (event) {
+                console.log(self.parentElement.className);
+                event.preventDefault();
+
+                if (event.target.parentElement.className === "column aboutSlide slideLeft") {
+                document.querySelector(".aboutSlide").classList.remove("slideLeft")
+        
+                }
+                if (event.target.parentElement.className === "column workSlide slideTop") {
+                    document.querySelector(".workSlide").classList.remove("slideTop")
+            
+                }
+                if (event.target.parentElement.className === "column contactSlide slideRight") {
+                    document.querySelector(".contactSlide").classList.remove("slideRight")
+            
+                }
+            });
     }
     </script>
     
