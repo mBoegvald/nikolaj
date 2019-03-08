@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        div.wrapper {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+
+        }
+        
+        div.container {
+            margin: 0;
+            background: black;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-right: -50%;
+            transform: translate(-50%, -50%); 
+            width: 95%;
+            height: 90%;
+        }
+
+        div.container iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        .aboutWrapper {
+            position: absolute;
+            top: 50%;
+            left: 1.25%;
+            transform:  translateX(-50%) translateY(-50%) rotate(-90deg);
+        }
+
+        .workWrapper {
+            position: absolute;
+            top: 2.5%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%)
+        }
+        
+        .contactWrapper {
+            position: absolute;
+            top: 50%;
+            left: 98.75%;
+            transform:  translateX(-50%) translateY(-50%) rotate(90deg);
+        }
+
+        .column {
+            grid-column: span 1;
+            
+        }
+
+        .aboutSlide {
+            
+            max-width: 0;
+            background-color: black;
+        }
+
+        .slide {
+            transition: 2s;
+            transition-timing-function: ease-out;
+            max-width: 100%;
+            z-index: 1;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <div class="workWrapper">
+            <p class="work">Work</p>
+        </div>
+        <div class="aboutWrapper">
+                <p class="about">About</p>
+        </div>
+        <div class="contactWrapper">
+                <p class="contact">Contact</p>
+        </div>
+
+        <div class="column aboutSlide"></div>
+
+        <div class="column workSlide">
+
+        </div>
+        
+
+        </div>
+        <div class="column contactSlide">
+
+        </div>
+        <div class="container">
+            <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4"></iframe>
+        </div>
+    </div>
+
+    <script>
+    
+    document.querySelector(".aboutWrapper").addEventListener("click", addSlide);
+
+    function addSlide() {
+        document.querySelector(".aboutSlide").classList.add("slide")
+    }
+    </script>
+    
+</body>
+</html>
