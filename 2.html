@@ -107,53 +107,100 @@
             transform: translateX(0);
             z-index: 1;
         }
-
-        .link {
-            font-size: 1.5em;
-            cursor: pointer;
-            padding: 10px 20px;
-            position: relative;
-            display: inline-block;
-            margin: 15px 25px;
-            outline: none;
-            color: #fff;
+        .wrapper a {
+            display: block;
+            padding: 15px;
             text-decoration: none;
+            color: #aaa;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 400;
-            text-shadow: 0 0 1px rgba(255,255,255,0.3);
-            font-size: 1.35em;
+            margin: 0 10px;
+            cursor: pointer;
         }
 
-        .link::after, .link::before {
+        .wrapper a,
+        .wrapper a:after,
+        .wrapper a:before {
+            transition: all .5s;
+        }
+
+        .wrapper a:hover {
+            color: #555;
+        }
+
+
+        .workWrapper.fill a, .aboutWrapper.fill a, .contactWrapper.fill a {
+            position: relative;
+            }
+            .workWrapper.fill a:after, .aboutWrapper.fill a:after, .contactWrapper.fill a:after { 
             position: absolute;
-            top: 0;
+            bottom: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            border: 3px solid #354856;
-            content: '';
-        }
+            right: 0;
+            margin: auto;
+            width: 0%;
+            content: '.';
+            color: transparent;
+            background: #aaa;
+            height: 1px;
+            }
 
-        .link::after {
-            border-color: #000;
+            .workWrapper.fill a:hover, .aboutWrapper.fill a:hover, .contactWrapper.fill a:hover { 
+                transition: all 2s;
+            }
+
+            .workWrapper.fill a:after, .aboutWrapper.fill a:after, .contactWrapper.fill a:after {
+            text-align: left;
+            content: '.';
+            margin: 0;
             opacity: 0;
-            transform: translateY(-7px) translateX(6px);
-        }
+            }
+            .workWrapper.fill a:hover, .aboutWrapper.fill a:hover, .contactWrapper.fill a:hover {
+            color: #fff;
+            z-index: 1;
+            }
+            .workWrapper.fill a:hover:after, .aboutWrapper.fill a:hover:after, .contactWrapper.fill a:hover:after {
+            z-index: -10;
+            animation: fill 1s forwards;
+            -webkit-animation: fill 1s forwards;
+            -moz-animation: fill 1s forwards;
+            opacity: 1;
+            }
 
+        @keyframes fill {
+            0% {
+                width: 0%;
+                height: 1px;
+            }
+            50% {
+                width: 100%;
+                height: 1px;
+            }
+            100% {
+                width: 100%;
+                height: 100%;
+                background: #333;
+            }
+        }
     </style>
 </head>
 <body>
-
+        
     <div class="wrapper">
-        <div class="workWrapper">
-            <p class="link work">Work</p>
+        <div class="workWrapper fill">
+            <div class="btn work">
+                <a>Work</a>
+            </div>
         </div>
-        <div class="aboutWrapper">
-            <p class="link about">About</p>
+        <div class="aboutWrapper fill">
+            <div class="btn work">
+                <a>About</a>
+            </div>
         </div>
-        <div class="contactWrapper">
-            <p class="link contact">Contact</p>
+        <div class="contactWrapper fill">
+            <div class="btn work">
+                <a>Contact</a>
+            </div>
         </div>
 
         <div class="column aboutSlide">
