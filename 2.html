@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
     <title>Document</title>
+    <!-- font-family: 'Kanit', sans-serif; -->
 
     <style>
         * {
             padding: 0;
             margin: 0;
-            font-family:Arial, Helvetica, sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
             font-weight: bold;
             box-sizing: border-box;
         }
@@ -22,7 +24,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             overflow: hidden;
-        }
+         }
         
         div.container {
             margin: 0;
@@ -38,9 +40,10 @@
         div.container iframe {
             width: 100%;
             height: 100%;
+            border: 0;
         }
 
-        .aboutWrapper {
+        .friendsWrapper {
             position: absolute;
             top: 50%;
             left: 2.5%;
@@ -69,10 +72,10 @@
             
         }
 
-        .aboutSlide {
+        .friendsSlide {
             transform: translateX(-100%);
             background-color: white;
-            height: 85%;
+            height: 75%;
             margin: auto 0;
         }
 
@@ -97,7 +100,8 @@
 
         .contactSlide {
             background-color: white;
-            transform: translateX(100%);height: 85%;
+            transform: translateX(100%);
+            height: 35%;
             margin: auto 0;
         }
 
@@ -111,7 +115,7 @@
             display: block;
             padding: 15px;
             text-decoration: none;
-            color: #aaa;
+            color: rgb(112, 112, 112);
             font-weight: 800;
             text-transform: uppercase;
             margin: 0 10px;
@@ -128,11 +132,11 @@
             color: #555;
         }
 
-
-        .workWrapper.fill a, .aboutWrapper.fill a, .contactWrapper.fill a {
+        .workWrapper.fill a, .friendsWrapper.fill a, .contactWrapper.fill a {
             position: relative;
-            }
-            .workWrapper.fill a:after, .aboutWrapper.fill a:after, .contactWrapper.fill a:after { 
+        }
+
+        .workWrapper.fill a:after, .friendsWrapper.fill a:after, .contactWrapper.fill a:after { 
             position: absolute;
             bottom: 0;
             left: 0;
@@ -143,29 +147,31 @@
             color: transparent;
             background: #aaa;
             height: 1px;
-            }
+        }
 
-            .workWrapper.fill a:hover, .aboutWrapper.fill a:hover, .contactWrapper.fill a:hover { 
+        .workWrapper.fill a:hover, .friendsWrapper.fill a:hover, .contactWrapper.fill a:hover { 
                 transition: all 2s;
-            }
+        }
 
-            .workWrapper.fill a:after, .aboutWrapper.fill a:after, .contactWrapper.fill a:after {
+        .workWrapper.fill a:after, .friendsWrapper.fill a:after, .contactWrapper.fill a:after {
             text-align: left;
             content: '.';
             margin: 0;
             opacity: 0;
-            }
-            .workWrapper.fill a:hover, .aboutWrapper.fill a:hover, .contactWrapper.fill a:hover {
+        }
+            
+        .workWrapper.fill a:hover, .friendsWrapper.fill a:hover, .contactWrapper.fill a:hover {
             color: #fff;
             z-index: 1;
-            }
-            .workWrapper.fill a:hover:after, .aboutWrapper.fill a:hover:after, .contactWrapper.fill a:hover:after {
+        }
+        .workWrapper.fill a:hover:after, .friendsWrapper.fill a:hover:after, .contactWrapper.fill a:hover:after {
             z-index: -10;
             animation: fill 1s forwards;
             -webkit-animation: fill 1s forwards;
             -moz-animation: fill 1s forwards;
             opacity: 1;
-            }
+        }
+
 
         @keyframes fill {
             0% {
@@ -192,9 +198,9 @@
                 <a>Work</a>
             </div>
         </div>
-        <div class="aboutWrapper fill">
+        <div class="friendsWrapper fill">
             <div class="btn work">
-                <a>About</a>
+                <a>Friends</a>
             </div>
         </div>
         <div class="contactWrapper fill">
@@ -203,7 +209,7 @@
             </div>
         </div>
 
-        <div class="column aboutSlide">
+        <div class="column friendsSlide">
 
             <button class="close">&times;</button>
         </div>
@@ -219,7 +225,7 @@
         </div>
         
         <div class="container">
-            <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4"></iframe>
+             <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4"></iframe>
         </div>
     </div>
 
@@ -227,11 +233,11 @@
 
         let buttons = document.querySelectorAll(".close");
         console.log(buttons);
-    document.querySelector(".aboutWrapper").addEventListener("click", addSlide);
+    document.querySelector(".friendsWrapper").addEventListener("click", addSlide);
     
 
     function addSlide() {
-        document.querySelector(".aboutSlide").classList.add("slideLeft")
+        document.querySelector(".friendsSlide").classList.add("slideLeft")
     }
 
     document.querySelector(".workWrapper").addEventListener("click", addSlide2);
@@ -242,7 +248,6 @@
     }
 
     document.querySelector(".contactWrapper").addEventListener("click", addSlide3);
-    
 
     function addSlide3() {
         document.querySelector(".contactSlide").classList.add("slideRight")
@@ -255,8 +260,8 @@
                 console.log(self.parentElement.className);
                 event.preventDefault();
 
-                if (event.target.parentElement.className === "column aboutSlide slideLeft") {
-                document.querySelector(".aboutSlide").classList.remove("slideLeft")
+                if (event.target.parentElement.className === "column friendsSlide slideLeft") {
+                document.querySelector(".friendsSlide").classList.remove("slideLeft")
         
                 }
                 if (event.target.parentElement.className === "column workSlide slideTop") {
