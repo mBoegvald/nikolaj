@@ -1,284 +1,385 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Kanit"
+      rel="stylesheet"
+    />
     <title>Document</title>
-    <!-- font-family: 'Kanit', sans-serif; -->
 
     <style>
-        * {
-            padding: 0;
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            font-weight: bold;
-            box-sizing: border-box;
-        }
+      :root {
+        --textColor: rgb(112, 112, 112);
+        --textHalfHover: #555;
+        --textHover: #fff;
+      }
+      * {
+        padding: 0;
+        margin: 0;
+        font-family: "Kanit", sans-serif;
+        font-weight: bold;
+        box-sizing: border-box;
+      }
 
-        div.wrapper {
-            width: 100vw;
-            height: 100vh;
-            position: relative;
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            overflow: hidden;
-         }
-        
-        div.container {
-            margin: 0;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            margin-right: -50%;
-            transform: translate(-50%, -50%); 
-            width: 90%;
-            height: 85%;
-        }
+      div.wrapper {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        overflow: hidden;
+      }
 
-        div.container iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
+      div.container {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        height: 85%;
+      }
 
-        .friendsWrapper {
-            position: absolute;
-            top: 50%;
-            left: 2.5%;
-            transform:  translateX(-50%) translateY(-50%) rotate(-90deg);
-        }
+      div.container iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
 
-        .workWrapper {
-            position: absolute;
-            top: 3.75%;
-            left: 50%;
-            transform: translateX(-50%) translateY(-50%)
-        }
-        
-        .contactWrapper {
-            position: absolute;
-            top: 50%;
-            left: 97.75%;
-            transform:  translateX(-50%) translateY(-50%) rotate(90deg);
-        }
+      .friendsWrapper {
+        position: absolute;
+        top: 50%;
+        left: 2.5%;
+        transform: translateX(-50%) translateY(-50%) rotate(-90deg);
+      }
 
-        .column {
-            grid-column: span 1;
-            border: 2px solid grey;
-            transition: 1s;
-            z-index: 1;
-            
-        }
+      .workWrapper {
+        position: absolute;
+        top: 3.75%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+      }
 
-        .friendsSlide {
-            transform: translateX(-100%);
-            background-color: white;
-            height: 75%;
-            margin: auto 0;
-        }
+      .contactWrapper {
+        position: absolute;
+        top: 50%;
+        left: 97.75%;
+        transform: translateX(-50%) translateY(-50%) rotate(90deg);
+      }
 
-        .slideLeft {
-            transition: 1s;
-            transition-timing-function: ease-out;
-            transform: translateX(0);
-            
-        }
+      .column {
+        grid-column: span 1;
+        border: 2px solid grey;
+        transition: 1s;
+        z-index: 1;
+      }
 
-        .workSlide {
-            transform: translateY(-100%);
-            background-color: white;
-        }
+      .friendsSlide {
+        transform: translateX(-100%);
+        background-color: white;
+        height: 75%;
+        margin: auto 0;
+        overflow: scroll;
+      }
 
-        .slideTop {
-            
-            transition-timing-function: ease-out;
-            transform: translateY(0);
-            z-index: 1;
-        }
+      .slideLeft {
+        transition: 1s;
+        transition-timing-function: ease-out;
+        transform: translateX(0);
+      }
 
-        .contactSlide {
-            background-color: white;
-            transform: translateX(100%);
-            height: 35%;
-            margin: auto 0;
-        }
+      .workSlide {
+        transform: translateY(-100%);
+        background-color: white;
+      }
 
-        .slideRight {
-            transition: 1s;
-            transition-timing-function: ease-out;
-            transform: translateX(0);
-            z-index: 1;
-        }
-        .wrapper a {
-            display: block;
-            padding: 15px;
-            text-decoration: none;
-            color: rgb(112, 112, 112);
-            font-weight: 800;
-            text-transform: uppercase;
-            margin: 0 10px;
-            cursor: pointer;
-        }
+      .slideTop {
+        transition-timing-function: ease-out;
+        transform: translateY(0);
+        z-index: 1;
+      }
 
-        .wrapper a,
-        .wrapper a:after,
-        .wrapper a:before {
-            transition: all .5s;
-        }
+      .contactSlide {
+        background-color: white;
+        transform: translateX(100%);
+        height: 35%;
+        margin: auto 0;
+      }
 
-        .wrapper a:hover {
-            color: #555;
-        }
+      .slideRight {
+        transition: 1s;
+        transition-timing-function: ease-out;
+        transform: translateX(0);
+        z-index: 1;
+      }
+      .wrapper a {
+        display: block;
+        padding: 5px;
+        text-decoration: none;
+        color: var(--textColor);
+        font-weight: 800;
+        text-transform: uppercase;
+        margin: 0 10px;
+        cursor: pointer;
+      }
 
-        .fill a, .friendsWrapper.fill a, .contactWrapper.fill a {
-            position: relative;
-        }
+      .wrapper a,
+      .wrapper a:after,
+      .wrapper a:before {
+        transition: all 0.5s;
+      }
 
-        .fill a:after, .friendsWrapper.fill a:after, .contactWrapper.fill a:after { 
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            margin: auto;
-            width: 0%;
-            content: '.';
-            color: transparent;
-            background: #aaa;
-            height: 1px;
-        }
+      .wrapper a:hover {
+        color: var(--textHalfHover);
+      }
 
-        .fill a:hover, .friendsWrapper.fill a:hover, .contactWrapper.fill a:hover { 
-                transition: all 2s;
-        }
+      .fill a,
+      .friendsWrapper.fill a,
+      .contactWrapper.fill a {
+        position: relative;
+      }
 
-        .fill a:after, .friendsWrapper.fill a:after, .contactWrapper.fill a:after {
-            text-align: left;
-            content: '.';
-            margin: 0;
-            opacity: 0;
-        }
-            
-        .fill a:hover, .friendsWrapper.fill a:hover, .contactWrapper.fill a:hover {
-            color: #fff;
-            z-index: 1;
-        }
-        .fill a:hover:after, .friendsWrapper.fill a:hover:after, .contactWrapper.fill a:hover:after {
-            z-index: -10;
-            animation: fill 1s forwards;
-            -webkit-animation: fill 1s forwards;
-            -moz-animation: fill 1s forwards;
-            opacity: 1;
-        }
+      .fill a:after,
+      .friendsWrapper.fill a:after,
+      .contactWrapper.fill a:after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 0%;
+        content: ".";
+        color: transparent;
+        background: #aaa;
+        height: 1px;
+      }
 
+      .fill a:hover,
+      .friendsWrapper.fill a:hover,
+      .contactWrapper.fill a:hover {
+        transition: all 2s;
+      }
 
-        @keyframes fill {
-            0% {
-                width: 0%;
-                height: 1px;
-            }
-            50% {
-                width: 100%;
-                height: 1px;
-            }
-            100% {
-                width: 100%;
-                height: 100%;
-                background: #333;
-            }
-        }
+      .fill a:after,
+      .friendsWrapper.fill a:after,
+      .contactWrapper.fill a:after {
+        text-align: left;
+        content: ".";
+        margin: 0;
+        opacity: 0;
+      }
 
-        .close {
-            border: 0;
+      .fill a:hover,
+      .friendsWrapper.fill a:hover,
+      .contactWrapper.fill a:hover {
+        color: var(--textHover);
+        z-index: 1;
+      }
+      .fill a:hover:after,
+      .friendsWrapper.fill a:hover:after,
+      .contactWrapper.fill a:hover:after {
+        z-index: -10;
+        animation: fill 1s forwards;
+        -webkit-animation: fill 1s forwards;
+        -moz-animation: fill 1s forwards;
+        opacity: 1;
+      }
+
+      @keyframes fill {
+        0% {
+          width: 0%;
+          height: 1px;
         }
+        50% {
+          width: 100%;
+          height: 1px;
+        }
+        100% {
+          width: 100%;
+          height: 100%;
+          background: #333;
+        }
+      }
+      .close {
+        position: relative;
+        border: 0;
+        transition: 1s;
+        width: 10%;
+        height: 10%;
+        font-size: 3em;
+        background-color: transparent;
+        color: var(--textColor);
+        cursor: pointer;
+      }
+      .friendsClose {
+        left: 85%;
+      }
+      .workClose {
+        left: 45%;
+      }
+      .contactClose {
+        left: 5%;
+      }
+
+      .close:hover {
+        color: var(--textHalfHover);
+      }
+      .columnContent {
+        padding: 0 30px 20px;
+      }
+
+      .columnContent p {
+        font-weight: lighter;
+      }
     </style>
-</head>
-<body>
-        
+  </head>
+  <body>
     <div class="wrapper">
-        <div class="workWrapper fill">
-            <div class="">
-                <a>Work</a>
-            </div>
+      <div class="workWrapper fill">
+        <div class="">
+          <a>Work</a>
         </div>
-        <div class="friendsWrapper fill">
-            <div class="">
-                <a>Friends</a>
-            </div>
+      </div>
+      <div class="friendsWrapper fill">
+        <div class="">
+          <a>Friends</a>
         </div>
-        <div class="contactWrapper fill">
-            <div class="">
-                <a>Contact</a>
-            </div>
+      </div>
+      <div class="contactWrapper fill">
+        <div class="">
+          <a>Contact</a>
         </div>
+      </div>
 
-        <div class="column friendsSlide">
-
-            <button class="close friendsClose">&times;</button>
+      <div class="column friendsSlide">
+        <button class="close friendsClose">&times;</button>
+        <div class="columnContent">
+          <h1>Lorem Ipsum</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
+            sit est perferendis, harum suscipit, natus earum id incidunt
+            necessitatibus magnam dolore impedit doloremque saepe debitis in
+            commodi, numquam voluptatum laudantium? Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. Nam eos, deleniti est non nihil,
+            magnam nemo at corporis, aliquam sit nesciunt cum vero iure tempore.
+            Saepe iusto magnam cum libero! Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. Consequatur nemo sint delectus iure
+            ipsa dolores odit deleniti, eum cupiditate aliquid, labore laborum
+            natus quae inventore? Delectus beatae nobis fugit incidunt? Lorem
+            ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem
+            distinctio delectus itaque necessitatibus cum! Soluta iste minima,
+            et quaerat modi beatae, delectus repellat temporibus eum dignissimos
+            debitis ea maiores nesciunt. Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Consectetur distinctio aliquid soluta natus
+            perferendis fuga? Voluptate, corrupti autem, eaque enim consectetur,
+            rerum accusantium quis ipsam doloribus quidem dolores dolorem
+            fugiat? Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            Quo aperiam ratione voluptas molestiae culpa dicta similique
+            quibusdam perspiciatis iusto deserunt architecto rem unde vel, animi
+            facilis nesciunt facere, placeat distinctio?
+          </p>
         </div>
+      </div>
 
-        <div class="column workSlide">
-            <button class="close workClose">&times;</button>
+      <div class="column workSlide">
+        <button class="close workClose">&times;</button>
+        <div class="columnContent">
+          <h1>Lorem Ipsum</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
+            sit est perferendis, harum suscipit, natus earum id incidunt
+            necessitatibus magnam dolore impedit doloremque saepe debitis in
+            commodi, numquam voluptatum laudantium? Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. Nam eos, deleniti est non nihil,
+            magnam nemo at corporis, aliquam sit nesciunt cum vero iure tempore.
+            Saepe iusto magnam cum libero! Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. Consequatur nemo sint delectus iure
+            ipsa dolores odit deleniti, eum cupiditate aliquid, labore laborum
+            natus quae inventore? Delectus beatae nobis fugit incidunt? Lorem
+            ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem
+            distinctio delectus itaque necessitatibus cum! Soluta iste minima,
+            et quaerat modi beatae, delectus repellat temporibus eum dignissimos
+            debitis ea maiores nesciunt.
+          </p>
         </div>
-        <div class="column contactSlide">
-            <button class="close contactClose">&times;</button>
-
+      </div>
+      <div class="column contactSlide">
+        <button class="close contactClose">&times;</button>
+        <div class="columnContent">
+          <h1>Contacts</h1>
+          <p>Asbjørn Rosenlund</p>
+          <p>asbjorn@asbjornrosenlund.com</p>
+          <p>Esromgade 15</p>
+          <p>2200 København N</p>
         </div>
-
+      </div>
     </div>
-        
-        <div class="container">
-             <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4"></iframe>
-        </div>
+
+    <div class="container">
+      <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4"></iframe>
     </div>
 
     <script>
+      let buttons = document.querySelectorAll(".close");
+      console.log(buttons);
+      document
+        .querySelector(".friendsWrapper")
+        .addEventListener("click", addSlide);
 
-        let buttons = document.querySelectorAll(".close");
-        console.log(buttons);
-    document.querySelector(".friendsWrapper").addEventListener("click", addSlide);
-    
+      function addSlide() {
+        document.querySelector(".friendsSlide").classList.add("slideLeft");
+      }
 
-    function addSlide() {
-        document.querySelector(".friendsSlide").classList.add("slideLeft")
-    }
+      document
+        .querySelector(".workWrapper")
+        .addEventListener("click", addSlide2);
 
-    document.querySelector(".workWrapper").addEventListener("click", addSlide2);
-    
+      function addSlide2() {
+        document.querySelector(".workSlide").classList.add("slideTop");
+      }
 
-    function addSlide2() {
-        document.querySelector(".workSlide").classList.add("slideTop")
-    }
+      document
+        .querySelector(".contactWrapper")
+        .addEventListener("click", addSlide3);
 
-    document.querySelector(".contactWrapper").addEventListener("click", addSlide3);
+      function addSlide3() {
+        document.querySelector(".contactSlide").classList.add("slideRight");
+      }
 
-    function addSlide3() {
-        document.querySelector(".contactSlide").classList.add("slideRight")
-    }
-    
-    for (let i = 0; i < buttons.length; i++) {
-            let self = buttons[i];
+      for (let i = 0; i < buttons.length; i++) {
+        let self = buttons[i];
 
-            self.addEventListener("click", function (event) {
-                console.log(self.parentElement.className);
-                event.preventDefault();
+        self.addEventListener("click", function(event) {
+          console.log(self.parentElement.className);
+          event.preventDefault();
 
-                if (event.target.parentElement.className === "column friendsSlide slideLeft") {
-                document.querySelector(".friendsSlide").classList.remove("slideLeft")
-        
-                }
-                if (event.target.parentElement.className === "column workSlide slideTop") {
-                    document.querySelector(".workSlide").classList.remove("slideTop")
-            
-                }
-                if (event.target.parentElement.className === "column contactSlide slideRight") {
-                    document.querySelector(".contactSlide").classList.remove("slideRight")
-            
-                }
-            });
-    }
+          if (
+            event.target.parentElement.className ===
+            "column friendsSlide slideLeft"
+          ) {
+            document
+              .querySelector(".friendsSlide")
+              .classList.remove("slideLeft");
+          }
+          if (
+            event.target.parentElement.className === "column workSlide slideTop"
+          ) {
+            document.querySelector(".workSlide").classList.remove("slideTop");
+          }
+          if (
+            event.target.parentElement.className ===
+            "column contactSlide slideRight"
+          ) {
+            document
+              .querySelector(".contactSlide")
+              .classList.remove("slideRight");
+          }
+        });
+      }
     </script>
-    
-</body>
+  </body>
 </html>
