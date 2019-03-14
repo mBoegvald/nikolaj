@@ -132,11 +132,11 @@
             color: #555;
         }
 
-        .workWrapper.fill a, .friendsWrapper.fill a, .contactWrapper.fill a {
+        .fill a, .friendsWrapper.fill a, .contactWrapper.fill a {
             position: relative;
         }
 
-        .workWrapper.fill a:after, .friendsWrapper.fill a:after, .contactWrapper.fill a:after { 
+        .fill a:after, .friendsWrapper.fill a:after, .contactWrapper.fill a:after { 
             position: absolute;
             bottom: 0;
             left: 0;
@@ -149,22 +149,22 @@
             height: 1px;
         }
 
-        .workWrapper.fill a:hover, .friendsWrapper.fill a:hover, .contactWrapper.fill a:hover { 
+        .fill a:hover, .friendsWrapper.fill a:hover, .contactWrapper.fill a:hover { 
                 transition: all 2s;
         }
 
-        .workWrapper.fill a:after, .friendsWrapper.fill a:after, .contactWrapper.fill a:after {
+        .fill a:after, .friendsWrapper.fill a:after, .contactWrapper.fill a:after {
             text-align: left;
             content: '.';
             margin: 0;
             opacity: 0;
         }
             
-        .workWrapper.fill a:hover, .friendsWrapper.fill a:hover, .contactWrapper.fill a:hover {
+        .fill a:hover, .friendsWrapper.fill a:hover, .contactWrapper.fill a:hover {
             color: #fff;
             z-index: 1;
         }
-        .workWrapper.fill a:hover:after, .friendsWrapper.fill a:hover:after, .contactWrapper.fill a:hover:after {
+        .fill a:hover:after, .friendsWrapper.fill a:hover:after, .contactWrapper.fill a:hover:after {
             z-index: -10;
             animation: fill 1s forwards;
             -webkit-animation: fill 1s forwards;
@@ -188,41 +188,45 @@
                 background: #333;
             }
         }
+
+        .close {
+            border: 0;
+        }
     </style>
 </head>
 <body>
         
     <div class="wrapper">
         <div class="workWrapper fill">
-            <div class="btn work">
+            <div class="">
                 <a>Work</a>
             </div>
         </div>
         <div class="friendsWrapper fill">
-            <div class="btn work">
+            <div class="">
                 <a>Friends</a>
             </div>
         </div>
         <div class="contactWrapper fill">
-            <div class="btn work">
+            <div class="">
                 <a>Contact</a>
             </div>
         </div>
 
         <div class="column friendsSlide">
 
-            <button class="close">&times;</button>
+            <button class="close friendsClose">&times;</button>
         </div>
 
         <div class="column workSlide">
-            <button class="close">&times;</button>
+            <button class="close workClose">&times;</button>
         </div>
         <div class="column contactSlide">
-            <button class="close">&times;</button>
+            <button class="close contactClose">&times;</button>
 
         </div>
 
-        </div>
+    </div>
         
         <div class="container">
              <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4"></iframe>
