@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href="https://fonts.googleapis.com/css?family=Kanit" />
+    <title>Document</title>
+
+    <style>
+      :root {
+        --textColor: rgb(112, 112, 112);
+        --textHalfHover: #555;
+        --textHover: #fff;
+      }
+      * {
+        padding: 0;
+        margin: 0;
+        font-family: "Kanit", sans-serif;
+        font-weight: bold;
+        box-sizing: border-box;
+      }
+
+      div.wrapper {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        overflow: hidden;
+      }
+
+      div.iFrameContainer {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        height: 90%;
+      }
+
+      div.iFrameContainer iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+
+      .friendsLink {
+        position: absolute;
+        top: 50%;
+        left: 5%;
+        transform: translateX(-50%) translateY(-50%) rotate(-90deg);
+      }
+
+      .workLink {
+        position: absolute;
+        top: 2.5%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+      }
+
+      .contactLink {
+        position: absolute;
+        top: 50%;
+        left: 95%;
+        transform: translateX(-50%) translateY(-50%) rotate(90deg);
+      }
+
+      /* Modal */
+
+      #modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        background-color: white;
+        width: 100%;
+        height: 100%;
+      }
+
+      .columnContent {
+        padding: 20px;
+      }
+
+      .columnContent h1 {
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      .columnContent h2 {
+        margin-bottom: 30px;
+        font-size: 1em;
+      }
+
+      .columnContent p {
+        margin: 10px 0;
+      }
+      .close {
+        position: relative;
+        border: 0;
+        transition: 1s;
+        width: 10%;
+        height: 10%;
+        font-size: 3em;
+        background-color: transparent;
+        color: var(--textColor);
+        cursor: pointer;
+      }
+      .friendsClose {
+        left: 85%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="modal">
+      <!-- <div class="column friendsSlide">
+        <button class="close friendsClose">&times;</button>
+        <div class="columnContent">
+          <h1>Friends</h1>
+          <h2>Super cool friends</h2>
+          <p><a href="">Link til ven</a></p>
+          <p><a href="">Link til ven</a></p>
+          <p><a href="">Link til ven</a></p>
+          <p><a href="">Link til ven</a></p>
+        </div>
+      </div> -->
+
+      <div class="column workSlide">
+        <button class="close workClose">&times;</button>
+        <div class="columnContent">
+          <h1>Lorem Ipsum</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
+            sit est perferendis, harum suscipit, natus earum id incidunt
+            necessitatibus magnam dolore impedit doloremque saepe debitis in
+            commodi, numquam voluptatum laudantium? Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. Nam eos, deleniti est non nihil,
+            magnam nemo at corporis, aliquam sit nesciunt cum vero iure tempore.
+            Saepe iusto magnam cum libero! Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. Consequatur nemo sint delectus iure
+            ipsa dolores odit deleniti, eum cupiditate aliquid, labore laborum
+            natus quae inventore? Delectus beatae nobis fugit incidunt? Lorem
+            ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem
+            distinctio delectus itaque necessitatibus cum! Soluta iste minima,
+            et quaerat modi beatae, delectus repellat temporibus eum dignissimos
+            debitis ea maiores nesciunt.
+          </p>
+        </div>
+      </div>
+      <!-- <div class="column contactSlide">
+        <button class="close contactClose">&times;</button>
+        <div class="columnContent">
+          <h1>Contacts</h1>
+          <p>Asbjørn Rosenlund</p>
+          <p>asbjorn@asbjornrosenlund.com</p>
+          <p>Esromgade 15</p>
+          <p>2200 København N</p>
+        </div>
+      </div> -->
+    </div>
+    <div class="wrapper">
+      <div class="iFrameContainer">
+        <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4"></iframe>
+      </div>
+      <div class="workLink fill">
+        <div>
+          <a>Work</a>
+        </div>
+      </div>
+      <div class="friendsLink fill">
+        <div>
+          <a>Friends</a>
+        </div>
+      </div>
+      <div class="contactLink fill">
+        <div>
+          <a>Contact</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

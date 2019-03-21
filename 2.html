@@ -4,10 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Kanit"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css?family=Kanit" />
     <title>Document</title>
 
     <style>
@@ -40,8 +37,8 @@
         left: 50%;
         margin-right: -50%;
         transform: translate(-50%, -50%);
-        width: 90%;
-        height: 85%;
+        width: 80%;
+        height: 90%;
       }
 
       div.container iframe {
@@ -53,13 +50,13 @@
       .friendsWrapper {
         position: absolute;
         top: 50%;
-        left: 2.5%;
+        left: 5%;
         transform: translateX(-50%) translateY(-50%) rotate(-90deg);
       }
 
       .workWrapper {
         position: absolute;
-        top: 3.75%;
+        top: 2.5%;
         left: 50%;
         transform: translateX(-50%) translateY(-50%);
       }
@@ -67,38 +64,35 @@
       .contactWrapper {
         position: absolute;
         top: 50%;
-        left: 97.75%;
+        left: 95%;
         transform: translateX(-50%) translateY(-50%) rotate(90deg);
       }
 
       .column {
         grid-column: span 1;
-        border: 2px solid grey;
+        background-color: white;
         transition: 1s;
         z-index: 1;
+        transition: 1s;
+        transition-timing-function: ease-out;
       }
 
       .friendsSlide {
-        transform: translateX(-100%);
-        background-color: white;
-        height: 75%;
         margin: auto 0;
         overflow: scroll;
+        height: 50%;
+        top: 10%;
       }
 
       .slideLeft {
-        transition: 1s;
-        transition-timing-function: ease-out;
         transform: translateX(0);
       }
 
       .workSlide {
         transform: translateY(-100%);
-        background-color: white;
       }
 
       .slideTop {
-        transition-timing-function: ease-out;
         transform: translateY(0);
         z-index: 1;
       }
@@ -127,83 +121,6 @@
         cursor: pointer;
       }
 
-      .wrapper a,
-      .wrapper a:after,
-      .wrapper a:before {
-        transition: all 0.5s;
-      }
-
-      .wrapper a:hover {
-        color: var(--textHalfHover);
-      }
-
-      .fill a,
-      .friendsWrapper.fill a,
-      .contactWrapper.fill a {
-        position: relative;
-      }
-
-      .fill a:after,
-      .friendsWrapper.fill a:after,
-      .contactWrapper.fill a:after {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: auto;
-        width: 0%;
-        content: ".";
-        color: transparent;
-        background: #aaa;
-        height: 1px;
-      }
-
-      .fill a:hover,
-      .friendsWrapper.fill a:hover,
-      .contactWrapper.fill a:hover {
-        transition: all 2s;
-      }
-
-      .fill a:after,
-      .friendsWrapper.fill a:after,
-      .contactWrapper.fill a:after {
-        text-align: left;
-        content: ".";
-        margin: 0;
-        opacity: 0;
-      }
-
-      .fill a:hover,
-      .friendsWrapper.fill a:hover,
-      .contactWrapper.fill a:hover {
-        color: var(--textHover);
-        z-index: 1;
-      }
-      .fill a:hover:after,
-      .friendsWrapper.fill a:hover:after,
-      .contactWrapper.fill a:hover:after {
-        z-index: -10;
-        animation: fill 1s forwards;
-        -webkit-animation: fill 1s forwards;
-        -moz-animation: fill 1s forwards;
-        opacity: 1;
-      }
-
-      @keyframes fill {
-        0% {
-          width: 0%;
-          height: 1px;
-        }
-        50% {
-          width: 100%;
-          height: 1px;
-        }
-        100% {
-          width: 100%;
-          height: 100%;
-          background: #333;
-        }
-      }
       .close {
         position: relative;
         border: 0;
@@ -235,26 +152,125 @@
       .columnContent p {
         font-weight: lighter;
       }
+
+      button:focus {
+        outline: 0;
+      }
+
+      @media only screen and (min-width: 650px) {
+        div.container {
+          width: 90%;
+          height: 85%;
+        }
+
+        .friendsWrapper {
+          position: absolute;
+          top: 50%;
+          left: 2.5%;
+          transform: translateX(-50%) translateY(-50%) rotate(-90deg);
+        }
+
+        .workWrapper {
+          position: absolute;
+          top: 3.75%;
+          left: 50%;
+          transform: translateX(-50%) translateY(-50%);
+        }
+
+        .contactWrapper {
+          position: absolute;
+          top: 50%;
+          left: 97.75%;
+          transform: translateX(-50%) translateY(-50%) rotate(90deg);
+        }
+      }
+      @media only screen and (min-width: 1024px) {
+        .friendsSlide {
+          transform: translateX(-100%);
+          height: 75%;
+        }
+        .wrapper a,
+        .wrapper a:after,
+        .wrapper a:before {
+          transition: all 0.5s;
+        }
+
+        .wrapper a:hover {
+          color: var(--textHalfHover);
+        }
+
+        .fill a,
+        .friendsWrapper.fill a,
+        .contactWrapper.fill a {
+          position: relative;
+        }
+
+        .fill a:after,
+        .friendsWrapper.fill a:after,
+        .contactWrapper.fill a:after {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          margin: auto;
+          width: 0%;
+          content: ".";
+          color: transparent;
+          background: #aaa;
+          height: 1px;
+        }
+
+        .fill a:hover,
+        .friendsWrapper.fill a:hover,
+        .contactWrapper.fill a:hover {
+          transition: all 2s;
+        }
+
+        .fill a:after,
+        .friendsWrapper.fill a:after,
+        .contactWrapper.fill a:after {
+          text-align: left;
+          content: ".";
+          margin: 0;
+          opacity: 0;
+        }
+
+        .fill a:hover,
+        .friendsWrapper.fill a:hover,
+        .contactWrapper.fill a:hover {
+          color: var(--textHover);
+          z-index: 1;
+        }
+        .fill a:hover:after,
+        .friendsWrapper.fill a:hover:after,
+        .contactWrapper.fill a:hover:after {
+          z-index: -10;
+          animation: fill 1s forwards;
+          -webkit-animation: fill 1s forwards;
+          -moz-animation: fill 1s forwards;
+          opacity: 1;
+        }
+
+        @keyframes fill {
+          0% {
+            width: 0%;
+            height: 1px;
+          }
+          50% {
+            width: 100%;
+            height: 1px;
+          }
+          100% {
+            width: 100%;
+            height: 100%;
+            background: #333;
+          }
+        }
+      }
     </style>
   </head>
   <body>
     <div class="wrapper">
-      <div class="workWrapper fill">
-        <div class="">
-          <a>Work</a>
-        </div>
-      </div>
-      <div class="friendsWrapper fill">
-        <div class="">
-          <a>Friends</a>
-        </div>
-      </div>
-      <div class="contactWrapper fill">
-        <div class="">
-          <a>Contact</a>
-        </div>
-      </div>
-
       <div class="column friendsSlide">
         <button class="close friendsClose">&times;</button>
         <div class="columnContent">
@@ -317,10 +333,24 @@
           <p>2200 København N</p>
         </div>
       </div>
-    </div>
-
-    <div class="container">
-      <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4"></iframe>
+      <div class="container">
+        <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4"></iframe>
+      </div>
+      <div class="workWrapper fill">
+        <div class="">
+          <a>Work</a>
+        </div>
+      </div>
+      <div class="friendsWrapper fill">
+        <div class="">
+          <a>Friends</a>
+        </div>
+      </div>
+      <div class="contactWrapper fill">
+        <div class="">
+          <a>Contact</a>
+        </div>
+      </div>
     </div>
 
     <script>
