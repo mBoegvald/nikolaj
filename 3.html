@@ -52,6 +52,7 @@
         top: 50%;
         left: 5%;
         transform: translateX(-50%) translateY(-50%) rotate(-90deg);
+        cursor: pointer;
       }
 
       .workLink {
@@ -59,6 +60,7 @@
         top: 2.5%;
         left: 50%;
         transform: translateX(-50%) translateY(-50%);
+        cursor: pointer;
       }
 
       .contactLink {
@@ -66,6 +68,98 @@
         top: 50%;
         left: 95%;
         transform: translateX(-50%) translateY(-50%) rotate(90deg);
+        cursor: pointer;
+      }
+      button:focus {
+        outline: 0;
+      }
+
+      /* Link animation */
+
+      .wrapper a {
+        padding: 5px;
+        text-decoration: none;
+        color: var(--textColor);
+        font-weight: 800;
+        text-transform: uppercase;
+        margin: 0 10px;
+        cursor: pointer;
+      }
+      .wrapper a,
+      .wrapper a:after,
+      .wrapper a:before {
+        transition: all 0.5s;
+      }
+
+      .wrapper a:hover {
+        color: var(--textHalfHover);
+      }
+
+      .fill a,
+      .friendsLink.fill a,
+      .contactLink.fill a {
+        position: relative;
+      }
+
+      .fill a:after,
+      .friendsLink.fill a:after,
+      .contactLink.fill a:after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 0%;
+        content: ".";
+        color: transparent;
+        background: #aaa;
+        height: 1px;
+      }
+
+      .fill a:hover,
+      .friendsLink.fill a:hover,
+      .contactLink.fill a:hover {
+        transition: all 2s;
+      }
+
+      .fill a:after,
+      .friendsLink.fill a:after,
+      .contactLink.fill a:after {
+        text-align: left;
+        content: ".";
+        margin: 0;
+        opacity: 0;
+      }
+
+      .fill a:hover,
+      .friendsLink.fill a:hover,
+      .contactLink.fill a:hover {
+        color: var(--textHover);
+        z-index: 1;
+      }
+      .fill a:hover:after,
+      .friendsLink.fill a:hover:after,
+      .contactLink.fill a:hover:after {
+        z-index: -10;
+        animation: fill 1s forwards;
+        -webkit-animation: fill 1s forwards;
+        -moz-animation: fill 1s forwards;
+        opacity: 1;
+      }
+      @keyframes fill {
+        0% {
+          width: 0%;
+          height: 1px;
+        }
+        50% {
+          width: 100%;
+          height: 1px;
+        }
+        100% {
+          width: 100%;
+          height: 100%;
+          background: #333;
+        }
       }
 
       /* Modal */
@@ -76,16 +170,14 @@
         left: 0;
         z-index: 1;
         background-color: white;
-        width: 100%;
-        height: 100%;
+        width: 100vw;
+        height: 100vh;
         background-color: transparent;
         pointer-events: none;
       }
 
       .column {
         position: absolute;
-        top: 0;
-        left: 0;
         width: 100%;
         height: 100%;
         opacity: 0;
@@ -133,6 +225,95 @@
       .show {
         pointer-events: all;
         opacity: 1;
+      }
+
+      /* Media queries */
+
+      @media only screen and (min-width: 650px) {
+        .columnContent {
+          max-width: 70%;
+          margin: 0 auto;
+        }
+        div.iFrameContainer {
+          width: 85%;
+          height: 90%;
+        }
+        .friendsLink {
+          left: 3.75%;
+        }
+
+        .workLink {
+          top: 2.5%;
+        }
+
+        .contactLink {
+          left: 96.25%;
+        }
+      }
+      @media only screen and (min-width: 950px) {
+        div.iFrameContainer {
+          width: 85%;
+          height: 85%;
+        }
+        .workLink {
+          top: 3.75%;
+        }
+        .wrapper a {
+          font-size: 1.5em;
+        }
+        #modal p,
+        #modal h2 {
+          font-size: 1.5em;
+        }
+        #modal h1 {
+          font-size: 3em;
+        }
+      }
+
+      @media only screen and (min-width: 1049px) {
+        .column {
+          width: calc(100% / 3);
+          display: none;
+        }
+        .friendsSlide {
+          transform: translateX(-100%);
+        }
+        .workSlide {
+          left: calc(100% / 3);
+          transform: translateY(-100%);
+        }
+        .contactSlide {
+          left: calc(100% / 3 * 2);
+          transform: translateX(100%);
+        }
+      }
+      @media only screen and (min-width: 1050px) {
+        .column {
+          display: block;
+          opacity: 1;
+        }
+
+        .slideTop {
+          transform: translateY(0);
+        }
+        .slideRight {
+          transform: translateX(0);
+        }
+        .slideLeft {
+          transform: translateX(0);
+        }
+      }
+      @media only screen and (min-width: 1300px) {
+        div.iFrameContainer {
+          width: 90%;
+          height: 85%;
+        }
+        .friendsLink {
+          left: 2.5%;
+        }
+        .contactLink {
+          left: 97.5%;
+        }
       }
     </style>
   </head>
@@ -214,12 +395,15 @@
         event.preventDefault();
         if (event.toElement.innerHTML === "Friends") {
           document.querySelector(".friendsSlide").classList.add("show");
+          document.querySelector(".friendsSlide").classList.add("slideLeft");
         }
         if (event.toElement.innerHTML === "Work") {
           document.querySelector(".workSlide").classList.add("show");
+          document.querySelector(".workSlide").classList.add("slideTop");
         }
         if (event.toElement.innerHTML === "Contact") {
           document.querySelector(".contactSlide").classList.add("show");
+          document.querySelector(".contactSlide").classList.add("slideRight");
         }
       });
     }
@@ -228,11 +412,22 @@
       let self = closeButtons[i];
 
       self.addEventListener("click", function(event) {
-        console.log(event.toElement.parentNode);
         event.preventDefault();
+        console.log();
 
         if (event.target === self) {
           event.toElement.parentNode.classList.remove("show");
+        }
+        if (event.target.className === "close workClose") {
+          document.querySelector(".workSlide").classList.remove("slideTop");
+        }
+        if (event.target.className === "close friendsClose") {
+          document.querySelector(".friendsSlide").classList.remove("slideLeft");
+        }
+        if (event.target.className === "close contactClose") {
+          document
+            .querySelector(".contactSlide")
+            .classList.remove("slideRight");
         }
       });
     }
