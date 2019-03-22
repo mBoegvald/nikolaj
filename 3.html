@@ -41,7 +41,7 @@
         height: 90%;
       }
 
-      div.iFrameContainer iframe {
+      iframe {
         width: 100%;
         height: 100%;
         border: 0;
@@ -78,8 +78,21 @@
         background-color: white;
         width: 100%;
         height: 100%;
+        background-color: transparent;
+        pointer-events: none;
       }
 
+      .column {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        pointer-events: none;
+        background-color: #fff;
+        transition: 1s;
+      }
       .columnContent {
         padding: 20px;
       }
@@ -106,15 +119,26 @@
         background-color: transparent;
         color: var(--textColor);
         cursor: pointer;
-      }
-      .friendsClose {
         left: 85%;
+      }
+      .workSlide {
+        overflow: scroll;
+      }
+      .workIframe {
+        width: 90%;
+        margin: 0 auto;
+        padding-top: 20px;
+      }
+
+      .show {
+        pointer-events: all;
+        opacity: 1;
       }
     </style>
   </head>
   <body>
     <div id="modal">
-      <!-- <div class="column friendsSlide">
+      <div class="column friendsSlide">
         <button class="close friendsClose">&times;</button>
         <div class="columnContent">
           <h1>Friends</h1>
@@ -124,60 +148,93 @@
           <p><a href="">Link til ven</a></p>
           <p><a href="">Link til ven</a></p>
         </div>
-      </div> -->
+      </div>
 
       <div class="column workSlide">
         <button class="close workClose">&times;</button>
         <div class="columnContent">
-          <h1>Lorem Ipsum</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
-            sit est perferendis, harum suscipit, natus earum id incidunt
-            necessitatibus magnam dolore impedit doloremque saepe debitis in
-            commodi, numquam voluptatum laudantium? Lorem ipsum dolor sit amet
-            consectetur adipisicing elit. Nam eos, deleniti est non nihil,
-            magnam nemo at corporis, aliquam sit nesciunt cum vero iure tempore.
-            Saepe iusto magnam cum libero! Lorem ipsum dolor sit amet
-            consectetur adipisicing elit. Consequatur nemo sint delectus iure
-            ipsa dolores odit deleniti, eum cupiditate aliquid, labore laborum
-            natus quae inventore? Delectus beatae nobis fugit incidunt? Lorem
-            ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem
-            distinctio delectus itaque necessitatibus cum! Soluta iste minima,
-            et quaerat modi beatae, delectus repellat temporibus eum dignissimos
-            debitis ea maiores nesciunt.
-          </p>
+          <h1>Work</h1>
+          <div class="workIframe">
+            <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4"></iframe>
+            <p>Kunstner - Sang</p>
+          </div>
+          <div class="workIframe">
+            <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4"></iframe>
+            <p>Kunstner - Sang</p>
+          </div>
+          <div class="workIframe">
+            <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4"></iframe>
+            <p>Kunstner - Sang</p>
+          </div>
+          <div class="workIframe">
+            <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4"></iframe>
+            <p>Kunstner - Sang</p>
+          </div>
+          <div class="workIframe">
+            <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4"></iframe>
+            <p>Kunstner - Sang</p>
+          </div>
         </div>
       </div>
-      <!-- <div class="column contactSlide">
+      <div class="column contactSlide">
         <button class="close contactClose">&times;</button>
         <div class="columnContent">
-          <h1>Contacts</h1>
+          <h1>Contact</h1>
+          <br />
           <p>Asbjørn Rosenlund</p>
           <p>asbjorn@asbjornrosenlund.com</p>
           <p>Esromgade 15</p>
           <p>2200 København N</p>
         </div>
-      </div> -->
+      </div>
     </div>
     <div class="wrapper">
       <div class="iFrameContainer">
         <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4"></iframe>
       </div>
       <div class="workLink fill">
-        <div>
-          <a>Work</a>
-        </div>
+        <a>Work</a>
       </div>
       <div class="friendsLink fill">
-        <div>
-          <a>Friends</a>
-        </div>
+        <a>Friends</a>
       </div>
       <div class="contactLink fill">
-        <div>
-          <a>Contact</a>
-        </div>
+        <a>Contact</a>
       </div>
     </div>
   </body>
+  <script>
+    let buttons = document.querySelectorAll(".fill");
+    let closeButtons = document.querySelectorAll(".close");
+
+    for (let i = 0; i < buttons.length; i++) {
+      let self = buttons[i];
+
+      self.addEventListener("click", function(event) {
+        event.preventDefault();
+        if (event.toElement.innerHTML === "Friends") {
+          document.querySelector(".friendsSlide").classList.add("show");
+        }
+        if (event.toElement.innerHTML === "Work") {
+          document.querySelector(".workSlide").classList.add("show");
+        }
+        if (event.toElement.innerHTML === "Contact") {
+          document.querySelector(".contactSlide").classList.add("show");
+        }
+      });
+    }
+
+    for (let i = 0; i < closeButtons.length; i++) {
+      let self = closeButtons[i];
+
+      self.addEventListener("click", function(event) {
+        console.log(event.toElement.parentNode);
+        event.preventDefault();
+
+        if (event.target === self) {
+          event.toElement.parentNode.classList.remove("show");
+        }
+      });
+    }
+  </script>
 </html>
