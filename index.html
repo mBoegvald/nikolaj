@@ -85,82 +85,6 @@
         margin: 0 10px;
         cursor: pointer;
       }
-      .wrapper a,
-      .wrapper a:after,
-      .wrapper a:before {
-        transition: all 0.5s;
-      }
-
-      .wrapper a:hover {
-        color: var(--textHalfHover);
-      }
-
-      .fill a,
-      .friendsLink.fill a,
-      .contactLink.fill a {
-        position: relative;
-      }
-
-      .fill a:after,
-      .friendsLink.fill a:after,
-      .contactLink.fill a:after {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: auto;
-        width: 0%;
-        content: ".";
-        color: transparent;
-        background: #aaa;
-        height: 1px;
-      }
-
-      .fill a:hover,
-      .friendsLink.fill a:hover,
-      .contactLink.fill a:hover {
-        transition: all 2s;
-      }
-
-      .fill a:after,
-      .friendsLink.fill a:after,
-      .contactLink.fill a:after {
-        text-align: left;
-        content: ".";
-        margin: 0;
-        opacity: 0;
-      }
-
-      .fill a:hover,
-      .friendsLink.fill a:hover,
-      .contactLink.fill a:hover {
-        color: var(--textHover);
-        z-index: 1;
-      }
-      .fill a:hover:after,
-      .friendsLink.fill a:hover:after,
-      .contactLink.fill a:hover:after {
-        z-index: -10;
-        animation: fill 1s forwards;
-        -webkit-animation: fill 1s forwards;
-        -moz-animation: fill 1s forwards;
-        opacity: 1;
-      }
-      @keyframes fill {
-        0% {
-          width: 0%;
-          height: 1px;
-        }
-        50% {
-          width: 100%;
-          height: 1px;
-        }
-        100% {
-          width: 100%;
-          height: 100%;
-          background: #333;
-        }
-      }
 
       /* Modal */
 
@@ -298,6 +222,49 @@
           height: 35%;
           top: 32.5%;
         }
+        div {
+          display: block;
+          position: relative;
+        }
+
+        .fullscreen {
+          height: 100%;
+          overflow: hidden;
+          width: 100%;
+        }
+        .video {
+          display: block;
+          left: 0px;
+          overflow: hidden;
+          padding-bottom: 56.25%; /* 56.25% = 16:9. set ratio */
+          position: absolute;
+          top: 50%;
+          width: 100%;
+          -webkit-transform-origin: 50% 0;
+          transform-origin: 50% 0;
+          -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+        }
+        .video .wrapper {
+          display: block;
+          height: 300%;
+          left: 0px;
+          overflow: hidden;
+          position: absolute;
+          top: 50%;
+          width: 100%;
+          -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+        }
+        .video iframe {
+          display: block;
+          height: 100%;
+          width: 100%;
+        }
+        html,
+        body {
+          height: 100%;
+        }
       }
       @media only screen and (min-width: 1050px) {
         .slideTop {
@@ -334,10 +301,6 @@
         <div class="columnContent">
           <h1>Friends</h1>
           <h2>Super cool friends</h2>
-          <!-- <p><a href="">Link til ven</a></p>
-          <p><a href="">Link til ven</a></p>
-          <p><a href="">Link til ven</a></p>
-          <p><a href="">Link til ven</a></p> -->
         </div>
       </div>
 
@@ -345,27 +308,6 @@
         <button class="close workClose">&times;</button>
         <div class="columnContent">
           <h1>Work</h1>
-
-          <!-- <div class="workIframe">
-            <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4"></iframe>
-            <p>Kunstner - Sang</p>
-          </div>
-          <div class="workIframe">
-            <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4"></iframe>
-            <p>Kunstner - Sang</p>
-          </div>
-          <div class="workIframe">
-            <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4"></iframe>
-            <p>Kunstner - Sang</p>
-          </div>
-          <div class="workIframe">
-            <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4"></iframe>
-            <p>Kunstner - Sang</p>
-          </div>
-          <div class="workIframe">
-            <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4"></iframe>
-            <p>Kunstner - Sang</p>
-          </div> -->
         </div>
       </div>
       <div class="column contactSlide">
@@ -396,10 +338,21 @@
       <p></p>
     </template>
 
-    <div class="wrapper">
-      <div class="iFrameContainer">
-        <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4"></iframe>
+    <div class="fullscreen">
+      <div class="video">
+        <div class="wrapper">
+          <iframe
+            src="https://player.vimeo.com/video/312792937?autoplay=1&loop=1"
+            width="500"
+            height="281"
+            frameborder="0"
+            webkitallowfullscreen
+            mozallowfullscreen
+            allowfullscreen
+          ></iframe>
+        </div>
       </div>
+
       <div class="workLink fill">
         <a>Work</a>
       </div>
@@ -411,7 +364,11 @@
       </div>
     </div>
   </body>
-
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"
+  ></script>
   <script src="https://player.vimeo.com/api/player.js"></script>
   <script>
     "use strict";
@@ -498,5 +455,21 @@
         }
       });
     }
+    function videoSize() {
+      var $windowHeight = $(window).height();
+      var $videoHeight = $(".video").outerHeight();
+      var $scale = $windowHeight / $videoHeight;
+
+      if ($videoHeight <= $windowHeight) {
+        $(".video").css({
+          "-webkit-transform": "scale(" + $scale + ") translateY(-50%)",
+          transform: "scale(" + $scale + ") translateY(-50%)"
+        });
+      }
+    }
+
+    $(window).on("load resize", function() {
+      videoSize();
+    });
   </script>
 </html>
