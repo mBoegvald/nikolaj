@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        font-family: "Kanit", sans-serif;
+        font-weight: bold;
+        box-sizing: border-box;
+      }
+      /* Boxes */
+
+      .wrapper {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+      }
+      .responsive-container {
+        position: relative;
+        height: 90%;
+        width: 80%;
+        overflow: hidden;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .responsive-container video {
+        position: absolute;
+        width: auto;
+        height: auto;
+        min-height: 100%;
+        min-width: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      /* LINKS */
+
+      .wrapper a {
+        padding: 5px;
+        text-decoration: none;
+        color: var(--textColor);
+        font-weight: 800;
+        text-transform: uppercase;
+        margin: 0 10px;
+        cursor: pointer;
+      }
+
+      .friendsLink {
+        position: absolute;
+        top: 50%;
+        left: 5%;
+        transform: translateX(-50%) translateY(-50%) rotate(-90deg);
+        cursor: pointer;
+      }
+
+      .workLink {
+        position: absolute;
+        top: 2.5%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        cursor: pointer;
+      }
+
+      .contactLink {
+        position: absolute;
+        top: 50%;
+        left: 95%;
+        transform: translateX(-50%) translateY(-50%) rotate(90deg);
+        cursor: pointer;
+      }
+
+      /* MODAL */
+
+      #modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        background-color: white;
+        width: 100vw;
+        height: 100vh;
+        background-color: transparent;
+        pointer-events: none;
+      }
+
+      .column {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        pointer-events: none;
+        background-color: #fff;
+        transition: 1s;
+      }
+      .columnContent {
+        padding: 20px;
+      }
+
+      .columnContent h1 {
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      .columnContent h2 {
+        margin-bottom: 30px;
+        font-size: 1em;
+      }
+
+      .columnContent p {
+        margin: 10px 0;
+      }
+      .close {
+        position: relative;
+        border: 0;
+        transition: 1s;
+        width: 10%;
+        height: 10%;
+        font-size: 3em;
+        background-color: transparent;
+        color: var(--textColor);
+        cursor: pointer;
+        left: 85%;
+      }
+      .workSlide {
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+      .workIframe {
+        padding: 56.25% 0 0 0;
+        position: relative;
+        border-bottom: 1px solid black;
+      }
+      .workIframe iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .show {
+        pointer-events: all;
+        opacity: 1;
+      }
+
+      /* MEDIA QUERIES */
+
+      @media only screen and (min-width: 650px) {
+        div.responsive-container {
+          width: 85%;
+          height: 90%;
+        }
+        .friendsLink {
+          left: 3.75%;
+        }
+        .workLink {
+          top: 2.5%;
+        }
+        .contactLink {
+          left: 96.25%;
+        }
+      }
+      @media only screen and (min-width: 950px) {
+        div.responsive-container {
+          width: 85%;
+          height: 85%;
+        }
+        .workLink {
+          top: 3.75%;
+        }
+        .wrapper a {
+          font-size: 1.5em;
+        }
+      }
+      @media only screen and (min-width: 1300px) {
+        div.responsive-container {
+          width: 90%;
+          height: 85%;
+        }
+        .friendsLink {
+          left: 2.5%;
+        }
+        .contactLink {
+          left: 97.5%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="modal">
+      <div class="column friendsSlide">
+        <button class="close friendsClose">&times;</button>
+        <div class="columnContent">
+          <h1>Friends</h1>
+          <h2>Super cool friends</h2>
+        </div>
+      </div>
+
+      <div class="column workSlide">
+        <button class="close workClose">&times;</button>
+        <div class="columnContent">
+          <h1>Work</h1>
+        </div>
+      </div>
+      <div class="column contactSlide">
+        <button class="close contactClose">&times;</button>
+        <div class="columnContent">
+          <h1>Contact</h1>
+          <br />
+          <p>Asbjørn Rosenlund</p>
+          <p>asbjorn@asbjornrosenlund.com</p>
+          <p>Esromgade 15</p>
+          <p>2200 København N</p>
+        </div>
+      </div>
+    </div>
+    <template class="friends-template">
+      <p><a href=""></a></p>
+    </template>
+
+    <template class="work-template">
+      <div class="workIframe">
+        <iframe
+          frameborder="0"
+          webkitallowfullscreen
+          mozallowfullscreen
+          allowfullscreen
+        ></iframe>
+      </div>
+      <p></p>
+    </template>
+    <div class="wrapper">
+      <div class="workLink">
+        <a>Work</a>
+      </div>
+      <div class="friendsLink">
+        <a>Friends</a>
+      </div>
+      <div class="contactLink">
+        <a>Contact</a>
+      </div>
+      <div class="responsive-container">
+        <video loop poster="kugle-2.jpg">
+          <source src="asbjorn.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </div>
+    <script>
+      let wpJson;
+      let buttons = document.querySelectorAll(".wrapper a");
+      let closeButtons = document.querySelectorAll(".close");
+      document.addEventListener("DOMContentLoaded", getJson);
+
+      async function getJson() {
+        let myJson = await fetch(
+          "http://asbjornrosenlund.com/wp-folder/wordpress/wp-json/acf/v3/custom_post/?per_page=50"
+        );
+        wpJson = await myJson.json();
+        showJson();
+      }
+
+      function showJson() {
+        wpJson.forEach(post => {
+          if (post.acf.category === "work") {
+            let dest = document.querySelector(".workSlide>.columnContent");
+            let temp = document.querySelector(".work-template");
+            let klon = temp.cloneNode(true).content;
+
+            klon.querySelector("iframe").src = post.acf.work_group.link;
+            klon.querySelector("p").textContent =
+              post.acf.work_group.artist + " - " + post.acf.work_group.song;
+
+            dest.appendChild(klon);
+          }
+          if (post.acf.category === "friends") {
+            let dest = document.querySelector(".friendsSlide>.columnContent");
+            let temp = document.querySelector(".friends-template");
+            let klon = temp.cloneNode(true).content;
+
+            klon.querySelector("a").href = post.acf.friends_group.link;
+            klon.querySelector("a").textContent = post.acf.friends_group.name;
+            dest.appendChild(klon);
+          }
+        });
+      }
+
+      // Buttons for opening modal
+
+      for (let i = 0; i < buttons.length; i++) {
+        let self = buttons[i];
+
+        self.addEventListener("click", function(event) {
+          event.preventDefault();
+          if (event.toElement.innerHTML === "Friends") {
+            document.querySelector(".friendsSlide").classList.add("show");
+            document.querySelector(".friendsSlide").classList.add("slideLeft");
+          }
+          if (event.toElement.innerHTML === "Work") {
+            document.querySelector(".workSlide").classList.add("show");
+            document.querySelector(".workSlide").classList.add("slideTop");
+          }
+          if (event.toElement.innerHTML === "Contact") {
+            document.querySelector(".contactSlide").classList.add("show");
+            document.querySelector(".contactSlide").classList.add("slideRight");
+          }
+        });
+      }
+
+      // Buttons for closing modal
+
+      for (let i = 0; i < closeButtons.length; i++) {
+        let self = closeButtons[i];
+
+        self.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (event.target === self) {
+            event.toElement.parentNode.classList.remove("show");
+          }
+          if (event.target.className === "close workClose") {
+            document.querySelector(".workSlide").classList.remove("slideTop");
+          }
+          if (event.target.className === "close friendsClose") {
+            document
+              .querySelector(".friendsSlide")
+              .classList.remove("slideLeft");
+          }
+          if (event.target.className === "close contactClose") {
+            document
+              .querySelector(".contactSlide")
+              .classList.remove("slideRight");
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

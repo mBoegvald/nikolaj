@@ -9,9 +9,8 @@
 
     <style>
       :root {
-        --textColor: rgb(112, 112, 112);
-        --textHalfHover: #555;
-        --textHover: #fff;
+        --linkColor1: rgb(241, 32, 248);
+        --linkColor2: rgb(93, 55, 230);
       }
       * {
         padding: 0;
@@ -21,30 +20,54 @@
         box-sizing: border-box;
       }
 
-      div.wrapper {
-        width: 100vw;
-        height: 100vh;
-        position: relative;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        overflow: hidden;
-      }
-
-      div.iFrameContainer {
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-right: -50%;
-        transform: translate(-50%, -50%);
-        width: 80%;
-        height: 90%;
-      }
-
       iframe {
         width: 100%;
         height: 100%;
         border: 0;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+      div {
+        display: block;
+        position: relative;
+      }
+
+      .fullscreen {
+        height: 100%;
+        overflow: hidden;
+        width: 100%;
+      }
+      .video {
+        display: block;
+        left: 0px;
+        overflow: hidden;
+        padding-bottom: 56.25%; /* 56.25% = 16:9. set ratio */
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        -webkit-transform-origin: 50% 0;
+        transform-origin: 50% 0;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+      }
+      .video .wrapper {
+        display: block;
+        height: 300%;
+        left: 0px;
+        overflow: hidden;
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+      }
+      .video iframe {
+        display: block;
+        height: 100%;
+        width: 100%;
       }
 
       .friendsLink {
@@ -74,16 +97,40 @@
         outline: 0;
       }
 
-      /* Link animation */
+      /* Links */
 
-      .wrapper a {
+      .fullscreen a,
+      #modal h1 {
         padding: 5px;
         text-decoration: none;
-        color: var(--textColor);
         font-weight: 800;
         text-transform: uppercase;
         margin: 0 10px;
         cursor: pointer;
+        font-size: 1.5em;
+        background: -webkit-linear-gradient(
+          var(--linkColor1),
+          var(--linkColor2)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .fullscreen a::after {
+        bottom: 0;
+        content: "";
+        left: 10%;
+        display: block;
+        height: 2px;
+        position: absolute;
+        background: var(--linkColor1);
+        transition: 0.5s;
+        width: 0;
+        opacity: 0.8;
+      }
+
+      .fullscreen a:hover::after {
+        width: 80%;
       }
 
       /* Modal */
@@ -126,7 +173,7 @@
         margin: 10px 0;
       }
       .close {
-        position: relative;
+        position: absolute;
         border: 0;
         transition: 1s;
         width: 10%;
@@ -135,7 +182,7 @@
         background-color: transparent;
         color: var(--textColor);
         cursor: pointer;
-        left: 85%;
+        left: 105%;
       }
       .workSlide {
         overflow-y: scroll;
@@ -153,6 +200,9 @@
         width: 100%;
         height: 100%;
       }
+      #modal h1 {
+        margin-bottom: 20px;
+      }
 
       .show {
         pointer-events: all;
@@ -165,10 +215,6 @@
         .columnContent {
           max-width: 70%;
           margin: 0 auto;
-        }
-        div.iFrameContainer {
-          width: 85%;
-          height: 90%;
         }
         .friendsLink {
           left: 3.75%;
@@ -198,7 +244,7 @@
           font-size: 1.5em;
         }
         #modal h1 {
-          font-size: 3em;
+          font-size: 2em;
         }
       }
 
@@ -222,49 +268,6 @@
           height: 35%;
           top: 32.5%;
         }
-        div {
-          display: block;
-          position: relative;
-        }
-
-        .fullscreen {
-          height: 100%;
-          overflow: hidden;
-          width: 100%;
-        }
-        .video {
-          display: block;
-          left: 0px;
-          overflow: hidden;
-          padding-bottom: 56.25%; /* 56.25% = 16:9. set ratio */
-          position: absolute;
-          top: 50%;
-          width: 100%;
-          -webkit-transform-origin: 50% 0;
-          transform-origin: 50% 0;
-          -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
-        }
-        .video .wrapper {
-          display: block;
-          height: 300%;
-          left: 0px;
-          overflow: hidden;
-          position: absolute;
-          top: 50%;
-          width: 100%;
-          -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
-        }
-        .video iframe {
-          display: block;
-          height: 100%;
-          width: 100%;
-        }
-        html,
-        body {
-          height: 100%;
-        }
       }
       @media only screen and (min-width: 1050px) {
         .slideTop {
@@ -279,12 +282,11 @@
         .column {
           display: block;
         }
+        .contactClose {
+          left: -15%;
+        }
       }
       @media only screen and (min-width: 1300px) {
-        div.iFrameContainer {
-          width: 90%;
-          height: 85%;
-        }
         .friendsLink {
           left: 2.5%;
         }
@@ -297,24 +299,23 @@
   <body>
     <div id="modal">
       <div class="column friendsSlide">
-        <button class="close friendsClose">&times;</button>
         <div class="columnContent">
+          <button class="close friendsClose">&times;</button>
           <h1>Friends</h1>
-          <h2>Super cool friends</h2>
+          <h2>Here are some of my friends, go check their work out!</h2>
         </div>
       </div>
 
       <div class="column workSlide">
-        <button class="close workClose">&times;</button>
         <div class="columnContent">
+          <button class="close workClose">&times;</button>
           <h1>Work</h1>
         </div>
       </div>
       <div class="column contactSlide">
-        <button class="close contactClose">&times;</button>
         <div class="columnContent">
+          <button class="close contactClose">&times;</button>
           <h1>Contact</h1>
-          <br />
           <p>Asbjørn Rosenlund</p>
           <p>asbjorn@asbjornrosenlund.com</p>
           <p>Esromgade 15</p>
@@ -343,23 +344,17 @@
         <div class="wrapper">
           <iframe
             src="https://player.vimeo.com/video/312792937?autoplay=1&loop=1"
-            width="500"
-            height="281"
-            frameborder="0"
-            webkitallowfullscreen
-            mozallowfullscreen
-            allowfullscreen
           ></iframe>
         </div>
       </div>
 
-      <div class="workLink fill">
+      <div class="workLink">
         <a>Work</a>
       </div>
-      <div class="friendsLink fill">
+      <div class="friendsLink">
         <a>Friends</a>
       </div>
-      <div class="contactLink fill">
+      <div class="contactLink">
         <a>Contact</a>
       </div>
     </div>
@@ -373,7 +368,7 @@
   <script>
     "use strict";
     let wpJson;
-    let buttons = document.querySelectorAll(".fill");
+    let buttons = document.querySelectorAll(".fullscreen a");
     let closeButtons = document.querySelectorAll(".close");
 
     document.addEventListener("DOMContentLoaded", getJson);
@@ -416,6 +411,7 @@
       let self = buttons[i];
 
       self.addEventListener("click", function(event) {
+        console.log("3");
         event.preventDefault();
         if (event.toElement.innerHTML === "Friends") {
           document.querySelector(".friendsSlide").classList.add("show");
