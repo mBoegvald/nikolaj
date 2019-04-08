@@ -98,9 +98,22 @@
         pointer-events: none;
         background-color: #fff;
         transition: 1s;
+        padding: 20px;
       }
       .columnContent {
-        padding: 20px;
+        position: absolute;
+        padding: 50px 20px;
+        height: 90%;
+        width: 90%;
+        left: 50%;
+        top: 52%;
+        transform: translate(-50%, -50%);
+      }
+
+      .columnContent a {
+        text-decoration: none;
+        color: black;
+        font-size: 1.5em;
       }
 
       .columnContent h1 {
@@ -115,17 +128,31 @@
       .columnContent p {
         margin: 10px 0;
       }
+
+      .friendsSlide > .columnContent {
+        background-image: url(tra.jpg);
+        background-position-x: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      .friendsSlide > h1 {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 96.5%;
+        left: 83%;
+        z-index: 1;
+      }
       .close {
-        position: relative;
+        position: absolute;
         border: 0;
         transition: 1s;
-        width: 10%;
-        height: 10%;
         font-size: 3em;
         background-color: transparent;
         color: var(--textColor);
         cursor: pointer;
-        left: 85%;
+        left: 90%;
+        top: 3.5%;
+        transform: translate(-50%, -50%);
       }
       .workSlide {
         overflow-y: scroll;
@@ -195,23 +222,20 @@
   <body>
     <div id="modal">
       <div class="column friendsSlide">
+        <h1>Friends</h1>
         <button class="close friendsClose">&times;</button>
-        <div class="columnContent">
-          <h1>Friends</h1>
-          <h2>Super cool friends</h2>
-        </div>
+        <div class="columnContent"></div>
       </div>
 
       <div class="column workSlide">
+        <h1>Work</h1>
         <button class="close workClose">&times;</button>
-        <div class="columnContent">
-          <h1>Work</h1>
-        </div>
+        <div class="columnContent"></div>
       </div>
       <div class="column contactSlide">
+        <h1>Contact</h1>
         <button class="close contactClose">&times;</button>
         <div class="columnContent">
-          <h1>Contact</h1>
           <br />
           <p>Asbjørn Rosenlund</p>
           <p>asbjorn@asbjornrosenlund.com</p>
