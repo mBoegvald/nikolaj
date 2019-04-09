@@ -99,6 +99,7 @@
         background-color: #fff;
         transition: 1s;
         padding: 20px;
+        text-transform: uppercase;
       }
       .columnContent {
         position: absolute;
@@ -113,7 +114,7 @@
       .columnContent a {
         text-decoration: none;
         color: black;
-        font-size: 1.5em;
+        font-size: 1.3em;
       }
 
       .columnContent p {
@@ -131,7 +132,7 @@
         position: absolute;
         transform: translate(-50%, -50%);
         top: 96.5%;
-        left: 83%;
+        left: 80%;
         z-index: 1;
       }
       .close {
@@ -149,6 +150,31 @@
       .workSlide {
         overflow-y: scroll;
         overflow-x: hidden;
+      }
+
+      .contactSlide > .columnContent {
+        background-image: url(kugle-2.jpg);
+        background-position-x: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding: 50px 10px;
+      }
+      .contactSlide > h1.director {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 96.5%;
+        left: 65%;
+        z-index: 1;
+        white-space: nowrap;
+      }
+      div.contactSlide > div > p.email {
+        font-size: 1em;
+      }
+      .contactSlide p {
+        margin: 20px 0;
+      }
+      .workPost {
+        margin-bottom: 20px;
       }
       .workIframe {
         padding: 56.25% 0 0 0;
@@ -226,13 +252,14 @@
       </div>
       <div class="column contactSlide">
         <h1>Contact</h1>
+
+        <h1 class="director">Film director</h1>
         <button class="close contactClose">&times;</button>
         <div class="columnContent">
-          <br />
           <p>Asbjørn Rosenlund</p>
-          <p>asbjorn@asbjornrosenlund.com</p>
-          <p>Esromgade 15</p>
-          <p>2200 København N</p>
+          <p class="email">asbjorn@asbjornrosenlund.com</p>
+          <p>+45 61 75 41 14</p>
+          <p>Copenhagen</p>
         </div>
       </div>
     </div>
@@ -241,15 +268,17 @@
     </template>
 
     <template class="work-template">
-      <div class="workIframe">
-        <iframe
-          frameborder="0"
-          webkitallowfullscreen
-          mozallowfullscreen
-          allowfullscreen
-        ></iframe>
+      <div class="workPost">
+        <div class="workIframe">
+          <iframe
+            frameborder="0"
+            webkitallowfullscreen
+            mozallowfullscreen
+            allowfullscreen
+          ></iframe>
+        </div>
+        <p></p>
       </div>
-      <p></p>
     </template>
     <div class="wrapper">
       <div class="workLink">
@@ -354,6 +383,15 @@
           }
         });
       }
+      let video = document.querySelector("video");
+      video.volume = 0.01;
+      video.addEventListener(
+        "click",
+        function() {
+          this.paused ? this.play() : this.pause();
+        },
+        false
+      );
     </script>
   </body>
 </html>
