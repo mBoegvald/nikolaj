@@ -4,8 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <title>Film Director | Asbjørn Rosenlund</title>
     <style>
+      :root {
+        --textColor: rgb(56, 56, 56);
+        --textHalfHover: #555;
+        --textHover: #fff;
+      }
+
       * {
         padding: 0;
         margin: 0;
@@ -253,6 +259,7 @@
         .column {
           width: calc(100% / 3);
           display: none;
+          opacity: 0;
         }
         .friendsSlide {
           transform: translateX(-100%);
@@ -286,7 +293,7 @@
         .friendsSlide > h1 {
           left: 78%;
         }
-        div.workSlide div.workPost > p {
+        div.workSlide article.workPost > p {
           font-size: 1em;
         }
         div.workSlide > h1 {
@@ -331,6 +338,83 @@
         }
         .column {
           display: block;
+          opacity: 1;
+        }
+      }
+      .wrapper a,
+      .wrapper a:after,
+      .wrapper a:before {
+        transition: all 0.5s;
+      }
+
+      .wrapper a:hover {
+        color: var(--textHalfHover);
+      }
+
+      .fill a,
+      .friendsLink.fill a,
+      .contactLink.fill a {
+        position: relative;
+      }
+
+      .fill a:after,
+      .friendsLink.fill a:after,
+      .contactLink.fill a:after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 0%;
+        content: ".";
+        color: transparent;
+        background: #aaa;
+        height: 1px;
+      }
+
+      .fill a:hover,
+      .friendsLink.fill a:hover,
+      .contactLink.fill a:hover {
+        transition: all 2s;
+      }
+
+      .fill a:after,
+      .friendsLink.fill a:after,
+      .contactLink.fill a:after {
+        text-align: left;
+        content: ".";
+        margin: 0;
+        opacity: 0;
+      }
+
+      .fill a:hover,
+      .friendsLink.fill a:hover,
+      .contactLink.fill a:hover {
+        color: var(--textHover);
+        z-index: 1;
+      }
+      .fill a:hover:after,
+      .friendsLink.fill a:hover:after,
+      .contactLink.fill a:hover:after {
+        z-index: -10;
+        animation: fill 1s forwards;
+        -webkit-animation: fill 1s forwards;
+        -moz-animation: fill 1s forwards;
+        opacity: 1;
+      }
+      @keyframes fill {
+        0% {
+          width: 0%;
+          height: 1px;
+        }
+        50% {
+          width: 100%;
+          height: 1px;
+        }
+        100% {
+          width: 100%;
+          height: 100%;
+          background: #333;
         }
       }
       @media only screen and (min-width: 1300px) {
@@ -347,7 +431,7 @@
         .contactSlide > h1.director {
           left: 28%;
         }
-        div.workSlide div.workPost > p {
+        div.workSlide article.workPost > p {
           font-size: 1.3em;
         }
       }
@@ -359,7 +443,7 @@
     </style>
   </head>
   <body>
-    <div id="modal">
+    <section id="modal">
       <div class="column friendsSlide">
         <button class="close friendsClose">&times;</button>
         <h1>Friends</h1>
@@ -383,15 +467,16 @@
           <p>Copenhagen</p>
         </div>
       </div>
-    </div>
+    </section>
     <template class="friends-template">
       <p><a href=""></a></p>
     </template>
 
     <template class="work-template">
-      <div class="workPost">
+      <article class="workPost">
         <div class="workIframe">
           <iframe
+            title="Musikvideo"
             frameborder="0"
             webkitallowfullscreen
             mozallowfullscreen
@@ -399,16 +484,16 @@
           ></iframe>
         </div>
         <p></p>
-      </div>
+      </article>
     </template>
     <div class="wrapper">
-      <div class="workLink">
+      <div class="workLink fill">
         <a>Work</a>
       </div>
-      <div class="friendsLink">
+      <div class="friendsLink fill">
         <a>Friends</a>
       </div>
-      <div class="contactLink">
+      <div class="contactLink fill">
         <a>Contact</a>
       </div>
       <div class="responsive-container">
@@ -425,7 +510,7 @@
 
       async function getJson() {
         let myJson = await fetch(
-          "http://asbjornrosenlund.com/wp-folder/wordpress/wp-json/acf/v3/custom_post/?per_page=50"
+          "http://asbjornrosenlund.com/wp-folder/wordpress/wp-json/acf/v3/custom_post/?per_page=50?filter[orderby]=date&order=asc"
         );
         wpJson = await myJson.json();
         showJson();
@@ -507,7 +592,7 @@
         });
       }
       let video = document.querySelector("video");
-      video.volume = 0.01;
+      video.volume = 0.25;
       video.addEventListener(
         "click",
         function() {
